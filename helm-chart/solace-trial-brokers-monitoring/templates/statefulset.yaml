@@ -38,7 +38,13 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ .Chart.Name }}-agent-env
-          resources: {{ .Values.resources }}
+          resources:
+            requests:
+              cpu: "{{ .Values.resource.requests.cpu }}"
+              memory: "{{ .Values.resource.requests.memory }}"
+            limits:
+              cpu: "{{ .Values.resource.limits.cpu }}"
+              memory: "{{ .Values.resource.limits.memory }}"
           securityContext:
             readOnlyRootFilesystem: True
       volumes:
