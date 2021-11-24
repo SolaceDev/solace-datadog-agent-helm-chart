@@ -28,5 +28,6 @@ jobs:
         uses: helm/chart-releaser-action@v1.2.0
         with:
           charts_dir: helm-chart
+          charts_repo_url: https://raw.githubusercontent.com/SolaceDev/solace-datadog-agent-helm-chart/gh-pages/
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
