@@ -52,6 +52,3 @@ spec:
         - name: {{ .Chart.Name }}-solace-trials-yaml-volume
           configMap:
             name: {{ .Chart.Name }}-solace-trials-yaml
-            items:
-                - key: solace_trials.yaml.tpl.tpl
-                  path: solace_trials.yaml.tpl

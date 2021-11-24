@@ -6,4 +6,13 @@ kind: ConfigMap
 metadata:
   name: {{ .Chart.Name }}-solace-trials-yaml
 data:
-  {{ (tpl (.Files.Glob "solace_trials.yaml.tpl").AsConfig . ) | indent 2 }}%
+  solace_trials.yaml: |-
+    init_config:
+
+    instances:
+      - host: {{ .Chart.Name }}-solace-trials
+        min_collection_interval: 600
+        maas_api_url: https://{{ .Values.maas.maas_prefix }}-api.{{ .Values.maas.maas_domain }}/api
+        ops_console_user: {{ .Values.maas.operator_username }}
+        ops_console_password: {{ .Values.maas.operator_password }}
+        semp_timeout: 10
