@@ -3,7 +3,7 @@ kind: StatefulSet
 metadata:
   name: {{ .Chart.Name }}-solace-trials
 spec:
-  serviceName: {{{ .Chart.Name }}-solace-trials-service-discovery
+  serviceName: {{ .Chart.Name }}-solace-trials-service-discovery
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
