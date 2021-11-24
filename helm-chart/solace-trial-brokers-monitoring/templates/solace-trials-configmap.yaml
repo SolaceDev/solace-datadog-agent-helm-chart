@@ -6,5 +6,4 @@ kind: ConfigMap
 metadata:
   name: {{ .Chart.Name }}-solace-trials-yaml
 data:
-  solace_trials.yaml: |-
-{{ (tpl (.Files.Glob "solace_trials.yaml.tpl").AsConfig . ) | indent 2 }}%
+  {{ (tpl (.Files.Glob "solace_trials.yaml.tpl").AsConfig . ) | indent 2 }}%
