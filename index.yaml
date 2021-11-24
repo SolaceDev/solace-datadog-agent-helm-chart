@@ -3,6 +3,16 @@ entries:
   solace-trial-brokers-monitoring:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-11-24T19:55:31.967389123Z"
+    description: A Helm chart that runs solace-datadog-agent for trial brokers
+    digest: f087783ec12dc1d0ddb164886992303fe1151ce3e8aac3ec7bbd0794500262c0
+    name: solace-trial-brokers-monitoring
+    type: application
+    urls:
+    - https://github.com/SolaceDev/solace-datadog-agent-helm-chart/releases/download/solace-trial-brokers-monitoring-0.1.3/solace-trial-brokers-monitoring-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-11-24T19:54:11.337123862Z"
     description: A Helm chart that runs solace-datadog-agent for trial brokers
     digest: defcaa2d52681462618ec0180374bc41132b28e6d77f6342ad7fd12f56c2f9ff
@@ -31,4 +41,4 @@ entries:
     urls:
     - https://github.com/SolaceDev/solace-datadog-agent-helm-chart/releases/download/solace-trial-brokers-monitoring-0.1.0/solace-trial-brokers-monitoring-0.1.0.tgz
     version: 0.1.0
-generated: "2021-11-24T19:54:11.337143162Z"
+generated: "2021-11-24T19:55:31.967414723Z"
