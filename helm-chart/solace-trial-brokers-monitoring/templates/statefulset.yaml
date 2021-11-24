@@ -40,8 +40,8 @@ spec:
                 name: {{ .Chart.Name }}-agent-env
           resources:
             requests:
-              cpu: "{{ .Values.resource.requests.cpu }}"
-              memory: "{{ .Values.resource.requests.memory }}"
+              cpu: "{{ .Values.resources.requests.cpu }}"
+              memory: "{{ .Values.resources.requests.memory }}"
             limits:
               cpu: "{{ .Values.resource.limits.cpu }}"
               memory: "{{ .Values.resource.limits.memory }}"
