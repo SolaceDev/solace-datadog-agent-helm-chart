@@ -46,8 +46,6 @@ spec:
             limits:
               cpu: "{{ .Values.resources.limits.cpu }}"
               memory: "{{ .Values.resources.limits.memory }}"
-          securityContext:
-            readOnlyRootFilesystem: True
       volumes:
         - name: {{ .Chart.Name }}-solace-trials-yaml-volume
           configMap:
