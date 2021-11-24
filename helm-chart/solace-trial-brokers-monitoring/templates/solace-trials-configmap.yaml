@@ -1,0 +1,9 @@
+# This is an example of how to provide a templated application properties file to an application running in kubernetes.
+# This block will read in 'files/application.properties' and create a configmap which can be mounted to a pod.
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Chart.Name }}-solace-trials-yaml
+data:
+  {{ (tpl (.Files.Glob "solace_trials.yaml.tpl").AsConfig . ) | indent 2 }}%

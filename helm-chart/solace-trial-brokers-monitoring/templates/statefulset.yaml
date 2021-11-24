@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Chart.Name }}-solace-trials
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/tags: '{"maas_id": "{{ .Values.maas.prefix }}", "maas_instance": "solace-broker-trials-datadog-agent"}'
+      labels:
+        app: {{ .Chart.Name }}
+    spec:
+      {{- if .Values.securityContext.enabled }}
+      securityContext:
+        fsGroup: {{ .Values.securityContext.fsGroup | int64 }}
+        {{- if and (.Values.securityContext.runAsUser) }}
+        runAsUser: {{ .Values.securityContext.runAsUser | int64 }}
+        {{- end }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8125
+              name: dogstatsdport
+              protocol: UDP
+            - containerPort: 8126
+              name: traceport
+              protocol: TCP
+          volumeMounts:
+            - name: {{ .Chart.Name }}-solace-trials-yaml-volume
+              mountPath: /conf.d
+          envFrom:
+            - configMapRef:
+                name: {{ .Chart.Name }}-agent-env
+          resources: {{ .Values.resources }}
+          securityContext:
+            readOnlyRootFilesystem: True
+      volumes:
+        - name: {{ .Chart.Name }}-solace-trials-yaml-volume
+          configMap:
+            name: {{ .Chart.Name }}-solace-trials-yaml
+            items:
+                - key: solace_trials.yaml.tpl.tpl
+                  path: solace_trials.yaml.tpl

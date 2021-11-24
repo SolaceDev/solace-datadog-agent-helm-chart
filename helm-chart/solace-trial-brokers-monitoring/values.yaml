@@ -1,0 +1,40 @@
+# Default values for solace-trial-brokers-monitoring.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  name: solace-datadog-agent
+  tag: DATAGO-23849
+  repository: 868978040651.dkr.ecr.us-east-1.amazonaws.com
+  pullPolicy: IfNotPresent
+
+
+imagePullSecrets: []
+
+accessKeyId: ""
+secretAccessKey: ""
+
+datadog:
+  apiKey: datadogapikey
+  appKey: datadogappkey
+
+maas:
+  maas_prefix: daily-dev
+  maas_domain: mymaas.net
+  operator_username: admin@mymaas.net
+  operator_password: admin
+
+resources:
+  requests:
+    memory: "256Mi"
+    cpu: "200m"
+  limits:
+    memory: "256Mi"
+    cpu: "200m"
+
+securityContext:
+  enabled: true
+  fsGroup: "0"
+  runAsUser: "101"
