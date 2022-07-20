@@ -10,6 +10,7 @@ on:
         default: true
         description: Create github release
       version:
+        description: "Version to release"
         required: true
 
 jobs:
@@ -39,10 +40,11 @@ jobs:
 
 
       - name: create tag
-        - uses: rickstaa/action-create-tag@v1
-          with:
-            tag: "${{ github.event.inputs.message }}"
-            message: "Release ${{ github.event.inputs.message }}"
+        uses: rickstaa/action-create-tag@v1
+        with:
+          tag: "${{ github.event.inputs.message }}"
+          message: "Release ${{ github.event.inputs.message }}"
+
       - name: Changelog
         uses: Bullrich/generate-release-changelog@master
         id: Changelog
@@ -51,9 +53,11 @@ jobs:
         with:
           from-tag: ${{ steps.last_release.outputs.tag_name }}
           to-tag: HEAD
+
       - name: Change log generator
         run: |
           echo "release notes are: ${{ steps.Changelog.outputs.changelog }}"
+
       - name: Create Release
         if: github.event.inputs.githubRelease
         id: create_release
