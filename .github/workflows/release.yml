@@ -46,10 +46,8 @@ jobs:
           message: "Release ${{ github.event.inputs.version }}"
 
       - name: Changelog
-        uses: Bullrich/generate-release-changelog@master
+        uses: scottbrenner/generate-changelog-action@master
         id: Changelog
-        env:
-          REPO: ${{ github.repository }}
         with:
           from-tag: ${{ steps.last_release.outputs.tag_name }}
           to-tag: ${{ github.event.inputs.version }}
