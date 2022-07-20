@@ -47,7 +47,6 @@ jobs:
 
       - name: "Generate Changelog"
         id: Changelog
-        if: startsWith(github.ref, 'refs/tags/')
         uses: mikepenz/release-changelog-builder-action@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
