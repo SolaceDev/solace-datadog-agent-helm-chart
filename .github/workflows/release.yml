@@ -42,8 +42,8 @@ jobs:
       - name: create tag
         uses: rickstaa/action-create-tag@v1
         with:
-          tag: "${{ github.event.inputs.message }}"
-          message: "Release ${{ github.event.inputs.message }}"
+          tag: "${{ github.event.inputs.version }}"
+          message: "Release ${{ github.event.inputs.version }}"
 
       - name: Changelog
         uses: Bullrich/generate-release-changelog@master
@@ -52,7 +52,7 @@ jobs:
           REPO: ${{ github.repository }}
         with:
           from-tag: ${{ steps.last_release.outputs.tag_name }}
-          to-tag: HEAD
+          to-tag: ${{ github.event.inputs.version }}
 
       - name: Change log generator
         run: |
@@ -65,8 +65,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          tag_name: ${{ github.event.inputs.version }}
+          release_name: Release ${{ github.event.inputs.version }}
           body: |
             ${{ steps.Changelog.outputs.changelog }}
           draft: false
