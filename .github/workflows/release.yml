@@ -45,12 +45,17 @@ jobs:
           tag: "${{ github.event.inputs.version }}"
           message: "Release ${{ github.event.inputs.version }}"
 
-      - name: Changelog
-        uses: scottbrenner/generate-changelog-action@master
+      - name: "Generate Changelog"
         id: Changelog
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: mikepenz/release-changelog-builder-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          from-tag: ${{ steps.last_release.outputs.tag_name }}
-          to-tag: ${{ github.event.inputs.version }}
+          ignorePreReleases: "true"
+          fromTag: ${{ steps.last_release.outputs.tag_name }}
+          toTag: ${{ github.event.inputs.version }}
+
 
       - name: Change log generator
         run: |
