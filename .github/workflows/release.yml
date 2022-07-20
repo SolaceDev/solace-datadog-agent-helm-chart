@@ -47,19 +47,16 @@ jobs:
 
       - name: "Generate Changelog"
         id: Changelog
-        uses: mikepenz/release-changelog-builder-action@v3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: charmixer/auto-changelog-action@v1
         with:
-          ignorePreReleases: "true"
-          fromTag: ${{ steps.last_release.outputs.tag_name }}
-          toTag: ${{ github.event.inputs.version }}
-          commitMode: "true"
-
+          token: ${{ secrets.GITHUB_TOKEN }}
+          since_tag: ${{ steps.last_release.outputs.tag_name }}
+          due_tag: ${{ github.event.inputs.version }}
 
       - name: Change log generator
         run: |
-          echo "release notes are: ${{ steps.Changelog.outputs.changelog }}"
+          echo "release notes are: "
+          cat CHANGELOG.md
 
       - name: Create Release
         if: github.event.inputs.githubRelease
