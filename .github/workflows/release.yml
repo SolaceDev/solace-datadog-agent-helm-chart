@@ -50,8 +50,7 @@ jobs:
         uses: charmixer/auto-changelog-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          since_tag: ${{ steps.last_release.outputs.tag_name }}
-          due_tag: ${{ github.event.inputs.version }}
+          release_branch: ${{ github.event.inputs.version }}
 
       - name: Change log generator
         run: |
