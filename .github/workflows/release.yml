@@ -66,6 +66,6 @@ jobs:
         with:
           tag_name: ${{ github.event.inputs.version }}
           release_name: Release ${{ github.event.inputs.version }}
-          body_file: CHANGELOG.md
+          body_path: CHANGELOG.md
           draft: false
           prerelease: false
