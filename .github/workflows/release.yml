@@ -54,6 +54,7 @@ jobs:
           ignorePreReleases: "true"
           fromTag: ${{ steps.last_release.outputs.tag_name }}
           toTag: ${{ github.event.inputs.version }}
+          commitMode: "true"
 
 
       - name: Change log generator
