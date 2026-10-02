@@ -19,12 +19,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@0717577d45739eb3c851188b29f50ed6c0b2194e # v2
         with:
           fetch-depth: 0
       - name: "call action"
         id: last_release
-        uses: InsonusK/get-latest-release@v1.0.1
+        uses: InsonusK/get-latest-release@f8686e4d0b2be19a66677ad5fa2f22c38ef43b62 # v1.0.1
         with:
           myToken: ${{ github.token }}
           exclude_types: "draft|prerelease"
@@ -40,14 +40,14 @@ jobs:
 
 
       - name: create tag
-        uses: rickstaa/action-create-tag@v1
+        uses: rickstaa/action-create-tag@a1c7777fcb2fee4f19b0f283ba888afa11678b72 # v1
         with:
           tag: "${{ github.event.inputs.version }}"
           message: "Release ${{ github.event.inputs.version }}"
 
       - name: "Generate Changelog"
         id: Changelog
-        uses: charmixer/auto-changelog-action@v1
+        uses: charmixer/auto-changelog-action@b25e89c9410e03189f0d48b02b3a8caad6e78015 # v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           since_tag: ${{ steps.last_release.outputs.tag_name }}
@@ -60,7 +60,7 @@ jobs:
       - name: Create Release
         if: github.event.inputs.githubRelease
         id: create_release
-        uses: actions/create-release@latest
+        uses: actions/create-release@0cb9c9b65d5d1901c1f53e5e66eaf4afd303e70e # latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
